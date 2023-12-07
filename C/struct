@@ -1,0 +1,167 @@
+#include "chapter1.h"
+
+void problem_03() {
+	char mark[5][5] = { 0 };
+	for (size_t i = 0; i < 5; i++){
+		for (size_t j = 0; j < 5; j++){
+			if (i == j ) {
+				mark[i][j] = (char)malloc(sizeof(char) * 40);
+				mark[i][j] = 'x';
+				
+				
+			}
+			
+		}
+	}
+	for (size_t i = 0; i < 5; i++){
+		for (size_t j = 0; j < 5; j++){
+		printf("%2c",mark[i][j]);
+		}
+		printf("\n");
+	}
+	for (size_t i = 0; i < 5; i++) {
+		for (size_t j = 0; j < 5; j++) {
+			free(mark[i][j]);
+		}
+	}
+	free(mark);
+}
+
+void problem_02() {
+	int len = 10, num = 5;
+	char** name;
+	name = (char**)malloc(num * sizeof(char*));
+	for (int i = 0; i < num; i++) {
+		name[i] = (char*)malloc(sizeof(char) * len);
+	}
+	for (int i = 0; i < num; i++) {
+		sprintf(name[i], "String %d", i);
+		puts(name[i]);
+	}
+
+
+	for (size_t i = 0; i < num; i++) {
+		free(name[i]);
+	}
+	free(name);
+}
+
+void input_name(char** pName) {
+	*pName = (char*)malloc(sizeof(char) *32);
+	strcpy(*pName, "o");
+}
+
+
+void problem_01() {
+	char* name;
+	input_name(&name);
+	printf("이름은 %s입니다.\n", name);
+	free(name);
+}
+
+void example_07() {
+	SHuman hong = { "홍길동", 19, 179.8 };
+	out_human1(hong);
+	out_human2(&hong);
+	SHuman macho;
+	macho = find_human();
+	printf("%s : %d살 키: %.2lfcm\n",
+		macho.name, macho.age, macho.height);
+}
+
+void out_human1(SHuman some) {
+	printf("%s : %d살 키 %.2fcm\n", some.name, some.age, some.height);
+}
+
+void out_human2(SHuman* some) {
+	printf("%s : %d살 키 %.2fcm\n",
+		some->name, some->age, some->height);
+	//(*some).name, (*some).age, (*some).height);
+}
+
+SHuman find_human() {
+	SHuman some = { "마초맨", 21, 179.9 };
+	return some;
+}
+
+
+
+
+
+void example_06(){ 
+	profile yuni;
+	strcpy(yuni.name, "yuni");
+	yuni.age = 20;
+	// char *intro
+	/*yuni.intro = (char*)malloc(80);*/ //안해도 결과는 출력되나 원래는 동적할당 해주고 사용
+	yuni.intro = "안녕하세요";
+
+}
+void example_05() {
+	student list[3] = { //number , name , grade
+		{1,"Kim",4.0},
+		{2,"Lee",4.1} ,
+		{3,"Son",4.2}};
+	int length = sizeof(list) / sizeof(list[0]);
+	for (size_t i = 0; i < 3; i++){
+		printf("%d %s %.2lf\n", list[i].number, list[i].name, list[i].grade);
+	}
+}
+
+void example_04() {
+	Person person = { "hong gildong",{2000,1,1 }, 180};
+	printf("%s %d-%d-%d %dcm\n", person.name, person.birth_date.year
+		, person.birth_date.month, person.birth_date.day, person.height);
+}
+
+void example_03() {
+	point p1, p2;
+	printf("첫 번째 점의 좌표 ex)10 10  >");
+	scanf("%d %d", &p1.x,&p1.y);
+	printf("두 번째 점의 좌표 ex)20 20  >");
+	scanf("%d %d", &p2.x, &p2.y);
+	int x_d = (p1.x - p2.x) * (p1.x - p2.x);
+	int y_d = (p1.y - p2.y) * (p1.y - p2.y);
+	double distance = sqrt(x_d+y_d);
+	printf("두점사이의 거리는 %.2lf 입니다.\n", distance);
+	
+
+	
+}
+
+void example_02() {
+	Book book;
+	printf("도서 제목 >");
+	gets(book.title);
+	printf("저자명 >");
+	gets(book.author);
+	printf("페이지수 >");
+	scanf("%d", &book.pages);
+	printf("가격 >");
+	scanf("%d", &book.price);
+
+	printf("%s %s %d %d\n", book.title, book.author, book.pages, book.price);
+}
+
+void example_01(){
+	 student s1;
+	s1.number = 20230001; //번호
+	strcpy(s1.name, "Hong gildong");
+	//strcpy_s(s1.name,(unsigned int)sizeof(s1.name),"hong gildong");
+	s1.grade = 4.3;
+
+	printf("이름 : %s\n", s1.name);
+	printf("학번 : %d\n", s1.number);
+	printf("학점 : %.2f\n", s1.grade);
+
+	printf("\n==============================\n");
+	point p1 = { 1, 2 };
+	point p2 = { .y = 2, .x = 1 };
+	point p3 = p1;
+	p3 = (point){ 1,2 };
+	printf("p1 : %d,%d\n", p1.x, p1.y);
+	printf("p1 : %d,%d\n", p2.x, p2.y);
+	printf("p1 : %d,%d\n", p3.x, p3.y);
+}
+
+
