@@ -1,0 +1,166 @@
+#include <stdio.h>
+void example_01();// for문
+void example_02();// for문 문제
+void example_03(); //구구단 프로그램
+void example_04(); //for문 테스트
+void example_05(); //구구단 2~9단 출력
+void example_06();
+
+int main(){
+	example_06();
+}
+
+void example_01() {
+	for (size_t i = 0; i < 10; i++){
+			printf("%02lld Hello World\n",i+1);
+	}
+	printf("\n");
+	for (size_t i = 10; i >0; i--)
+	{
+		printf("%02lld Hello World\n", i - 1);
+	}
+	printf("\n");
+	// 1부터 100까지의 홀수의 합
+	// 방법#1
+	size_t sum = 0;
+	for (size_t i = 1; i <= 100; i++){
+		if (i % 2 == 1) {
+			sum += i;
+		}
+	}
+	printf("1부터 %d까지의 홀수의 합 : %lld\n", 100, sum);
+
+	// 방법 #2
+	sum = 0;
+	for (size_t i = 1; i <=100 ; i+=2){
+		sum += i;
+	}
+	printf("1부터 %d까지의 홀수의 합 : %lld\n", 100, sum);
+}
+//두 수 입력받은후 작은~큰수까지의 합
+void example_02() {
+	int n1, n2;
+	printf("두 수 입력 > \n");
+	scanf_s("%d", &n1);
+	scanf_s("%d", &n2);
+	int startNum = (n1 < n2) ? n1 : n2;
+	int endNum= (n1 > n2) ? n1 : n2;
+	int sum = 0;
+		for (size_t i = startNum; i <= endNum ; i++){
+			sum += i;
+		}
+	printf("%d와 %d까지의 합은 %lld입니다.\n",startNum,endNum,sum);	
+}
+void example_03() {
+	printf("====구구단 출력 프로그램====\n");
+		printf("몇단을 출력할까요?\n");
+		int n1;
+		scanf_s("%d", &n1);
+		for (int i = 1; i < 10; i++)
+		{
+			printf("%d * %d = %02d\n", n1, i, n1 * i);
+		}
+}
+//for문 테스트
+void example_04() {
+	// size_t  : unsigned Long Long  -> 8byte 0~2^64-1
+	for (size_t i = 0; i < 3; i++){
+		for (size_t j = 0; j< 2; j++){
+			printf("i : %d j : %lld\n", i, j);
+		}
+		printf("\n");
+	}
+}
+//구구단 2~9단 출력
+void example_05() {
+	for (size_t dan = 2; dan <=9; dan++){
+		for (size_t n = 1; n <=9; n++)
+		{
+			printf("%d*%d=%02d\n", dan, n, dan * n);
+		}
+		printf("\n");
+	}
+	printf("\n\n\n");
+	for (size_t n = 1; n <= 9; n++) {
+		for (size_t dan = 2; dan <= 9; dan++)
+		{
+			printf("%d*%d=%02d ", dan, n, dan * n);
+		}
+		printf("\n");
+	}	
+}
+
+void example_06() {
+	int total_line;
+	printf("몇줄 줄력할까요? >\n");
+	scanf_s("%d", &total_line);
+	//10*10 크기의 별을 찍어보자
+	for (size_t line = 0; line <= total_line; line++) {
+		for (size_t star = 0; star <= 10; star++)
+		{
+			printf("*");
+
+		}
+		printf("\n");
+	}
+	printf("\n\n\n\n");
+	//전체 라인수는 totalline = 5
+	//*
+	//**
+	//***
+	//****
+	//*****
+	for (size_t line = 0; line <= total_line; line++) {
+		for (size_t star = 0; star < line; star++) {
+			printf("*");
+
+		}
+		printf("\n");
+	}
+	printf("\n\n\n\n");
+
+	for (size_t line = 0; line < total_line; line++)
+	{
+		//공백 출력
+		for (size_t space = 0; space < line; space++)
+		{
+			printf(" ");
+		}
+		for (size_t star = 0; star < total_line - line; star++)
+		{
+			printf("*");
+		}
+		printf("\n");
+	}
+	printf("\n\n\n\n");
+	int count = 1;
+	for (size_t line = 0; line <= total_line; line++) {
+		for (size_t star = 0; star <= line; star++)
+		{
+			printf("%d",count);
+			
+
+		}
+		printf("\n");
+		count++;
+	}
+	printf("\n\n\n\n\n");
+	int num = 0;
+	for (size_t line = 0; line < total_line; line++)
+	{
+		//공백 출력
+		for (size_t space = 0; space < line; space++)
+		{
+			printf(" ");
+		}
+		for (size_t star = 0; star < total_line - line; star++)
+		{
+		printf("%c",num+'A');
+		}
+		printf("\n");
+		num++;
+		
+		
+	}
+}
+		
