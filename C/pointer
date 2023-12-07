@@ -1,0 +1,222 @@
+#include "chapter01.h"
+
+void problem_01() {
+	int lotto_nums[6];
+	input_nums(lotto_nums);
+	print_nums(lotto_nums);
+}
+
+void input_nums(int* lotto_nums){
+	int num, count = 0;
+	while(count <6){
+		printf("정수(1~45)입력 > ");
+		scanf_s("%d", &num);
+		lotto_nums[count] = num;
+		if (num >= 1 && num <= 45) {
+			for (size_t i = 0; i <count ; i++){
+				if (lotto_nums[i] == num) {
+					printf("중복숫자!!!!\n");
+					count--;
+					break;
+				}
+			}
+			count++;
+		}
+		else {
+			printf("1~45 사이의 값을 입력!!\n");
+		}
+	}
+	
+}
+
+void print_nums(int* lotto_nums){
+	for (int i = 0; i < 6; i++) {
+		for (int j = 0; j < 5; j++) {
+			if (lotto_nums[j] > lotto_nums[j + 1])
+				swapi(&lotto_nums[j], &lotto_nums[j + 1]);
+		}
+	}
+	for (size_t i = 0; i < 6; i++){
+		printf("%3d", lotto_nums[i]);
+	}
+	printf("\n");
+}
+
+void swapi(int* num1, int* num2) {
+	int tmp = *num1;
+	*num1 = *num2;
+	*num2 = tmp;
+}
+
+void example_08() {
+	double max, mid, min;
+	printf("실수값 3개 입력 > ");
+	scanf_s("%lf %lf %lf", &max, &mid, &min);
+	line_up(&max, &mid, &min);
+	printf("정렬된 값 : %.1lf %.1lf %.1lf\n", max, mid, min);
+}
+
+void line_up(double* maxp, double* midp, double* minp){
+	double arr_d[3] = { *maxp, *midp, *minp };
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 2; j++) {
+			if (arr_d[j] < arr_d[j + 1]) {
+				swapd((arr_d + j), (arr_d + j + 1));
+			}
+		}
+	}
+	*maxp = arr_d[0];
+	*midp = arr_d[1];
+	*minp = arr_d[2];
+	/*if (*maxp > *midp && *maxp > *minp) {
+		if (*minp > *midp)
+			swapd(midp, minp);
+	}
+	else if (*midp > *maxp && *midp > *minp) {
+		swapd(maxp, midp);
+		if (*minp > *midp)
+			swapd(midp, minp);
+	}
+	else {
+		swapd(maxp, minp);
+		if (*minp > *midp)
+			swapd(midp, minp);
+	}*/
+}
+
+void swapd(double* pa, double* pb){
+	double temp;
+	temp = *pa;
+	*pa = *pb;
+	*pb = temp;
+}
+
+void example_07() {
+	int myArr[3] = { 1,2,3 };
+	sub2(myArr, 2);
+	printf("%d %d %d \n", myArr[0], myArr[1], myArr[2]);
+}
+
+void sub2(int* arr, int size){
+
+
+	*arr = 4;
+	*(arr+1) = 5;
+	*(arr+2) = 6;
+}
+
+void example_06() {
+	char str[] = "korea";
+	char* p;
+	p = strchr(str, 'r');
+	while (p != NULL) {
+		printf("found at %d\n", (p - str) + 1);
+		*p = 'A';
+		p = strchr(p + 1,'r');
+	}
+	puts(str);
+}
+
+void example_05() {
+	char s[8] = "Basic-C";
+	char* p = s;
+	int length = (sizeof(s)) / (sizeof(s[0]))-1;
+	for (size_t i = 0; i < length; i++){
+		printf("%c", p[length-1-i]);
+	}
+}
+
+void example_04() {
+	float slope, yintercept;
+	if (get_line_parameter(3, 3, 6, 6, &slope, &yintercept) != -1) {
+		printf("기울기:%.2f 절편:%.2f\n", slope, yintercept);
+	}
+	else {
+		printf("Error\n");
+	}
+}
+
+int get_line_parameter(int x1, int y1, int x2, int y2, float* slope,float* yintercept) {
+
+	if (x1 == x2) {
+		return -1;
+	}
+	else {
+		//기울기 *slope
+		*slope = (float)(y2 - y1) / (float)(x2 - x1); //delta y / delta x
+		*yintercept = y1 - (*slope) * x1;
+		return 0;
+	}
+}
+
+void example_03() {
+	int num1 = 100, num2 = 200;
+	printf("num1:%d num2:%d\n", num1, num2);
+	swap1(num1, num2);
+	printf("num1:%d num2:%d\n", num1, num2);
+	printf("\n=================\n");
+	printf("num1:%d num2:%d\n", num1, num2);
+	swap2(&num1, &num2);
+	printf("num1:%d num2:%d\n", num1, num2);
+}
+
+void swap1(int num1, int num2){
+	int tmp = num1;
+	num1 = num2;
+	num2 = tmp;
+	printf("In SWAP1 num1:%d num2:%d\n", num1, num2);
+}
+
+void swap2(int *num1, int *num2) {
+	int tmp = *num1;
+	*num1 = *num2;
+	*num2 = tmp;
+	printf("In SWAP2 num1:%d num2:%d\n", *num1, *num2);
+}
+
+// 포인터 형변환
+void example_02() {
+	int data = 0x0A0B0C0D;
+	char* pc;
+	pc = (char*) & data;
+	for (size_t i = 0; i < 4; i++){
+		printf("*(pc+%d) : %02x\n", i, *(pc + i));
+
+	}
+}
+
+void example_01() {
+	int i = 10;
+	char c = 'a';
+	float f = 1.0f;
+	double d = 2.0;
+	int* pointer_i = &i;
+	char* pointer_c = &c;
+	float* pointer_f = &f;
+	double* pointer_d = &d;
+
+	printf("sizeof int : %d int* : %d\n",(unsigned) sizeof(i), (unsigned)sizeof(pointer_i));
+	printf("sizeof char : %d char* : %d\n", (unsigned)sizeof(c), (unsigned)sizeof(pointer_c));
+	printf("sizeof float : %d float* : %d\n", (unsigned)sizeof(f), (unsigned)sizeof(pointer_f));
+	printf("sizeof double : %d double* : %d\n", (unsigned)sizeof(d), (unsigned)sizeof(pointer_d));
+	printf("=============================================\n");
+	pointer_c=(char*)10000;
+	pointer_i = (int*)10000;
+	pointer_d = (double*)10000;
+	printf("i :%d c :%d d: %d\n",pointer_c,pointer_i,pointer_d);
+	pointer_c++;
+	pointer_i++;
+	pointer_d++;
+	printf("i :%d c :%d d: %d\n", pointer_c, pointer_i, pointer_d);
+	pointer_c+=2;
+	pointer_i+=2; 
+	pointer_d+=2;
+	printf("i :%d c :%d d: %d\n", pointer_c, pointer_i, pointer_d);
+	printf("\n=============================================\n");
+	int* pi = &i;
+	printf("i = %d  pi = %p\n", i, pi);//FF964
+    (*pi)++;
+	printf("i = %d  pi = %p\n", i, pi);//FF968
+	*pi++;
+	printf("i = %d  pi = %p\n", i, pi);//FF968
+}
