@@ -1,0 +1,302 @@
+#include <stdio.h>
+#define TRUE 1
+#define FALSE 0
+#include <math.h>
+typedef int BOOLEAN;
+
+void example_01(); // printf
+void example_02(); // scanf
+void example_03(); //정수형실수형 차이확인 +아스키코드 출력
+void example_04(); //숫자두개입력받은후 덧셈뺄셈
+void example_05(); // 이름 입력받기
+void example_06(); // 진수변환
+void example_07(); // 자리수
+void example_08(); //산술 연산자
+void example_09(); //문제
+void example_10();//논리 연산자
+void example_11();//증감연산자
+void example_12();// bit연산자
+void example_13();//산술변환,캐스트 연산자
+void example_14();//
+
+int main() 
+{
+	example_14();
+	
+}
+
+void example_14() //
+{
+
+}
+
+void example_13() //산술 변환,캐스트 연산자
+{
+	int a = 3;
+	double d = 3.499;
+
+	int b = (a + d)+0.5;
+	printf("a+d=%d\n", a + d);
+	printf("a+d=%d\n", b);
+	printf("d의 값 : %d\n", (int)d);
+	
+	display_binary2(0xA);
+	
+}
+
+void example_12()// bit 연산자
+{
+	int num1 = 0x69;
+	int num2 = 0x55;
+	printf("num1 & num2 = 0x%x\n", num1 & num2);
+	printf("num1 | num2 = 0x%x\n", num1 | num2);
+	printf("num1 ^ num2 = 0x%x\n", num1 ^ num2);
+	printf("num1 << 1 : = 0x%x\n", num1 << 1);
+	printf("num1 >> 1 : = 0x%x\n", num1 >> 1);
+	printf("num1 >> 1 : = %d\n", num1>> 1);
+	int c = 105; //16진수 0x69
+	printf("not of c : 0x%x\n", ~c);
+}
+
+void example_11()//증감연산자
+{
+	int a, b;
+	a = 10;
+	a++;
+	printf("a :%d\n", a);
+	b = a++;
+	printf("a : %d b : %d\n", a, b);
+	printf("--------------------\n");
+	a = b=10;
+	printf("a : %d b : %d\n",((1+ a++)+2),++ b);
+	
+	printf("a : %d b:%d\n", a, b);
+}
+
+
+void example_10() { // 논리연산자 && || 
+	/* 커피를 마시는데 
+	 기존에 커피를 마셨으면 디카페인을 마심
+	 오후3시가 넘어가면 커피를 디카페인 마심*/
+	BOOLEAN morningCoffee = FALSE;
+	int hour = 11;
+	 /*아아 : 커피를 안마셨고 그리고 오후3시이전*/
+	if (!morningCoffee && hour < 15) {
+		printf("아이스아메리카노 + 1\n");
+	}
+	else {
+		printf("디카페인 커피 + 1\n");
+	}
+
+
+	/* 디카페인 : 이미커피를 마셨고 또는 오후15시이후*/
+	if ((morningCoffee == TRUE) || (hour > 15)) {
+		printf("디카페인 커피 + 1\n");
+	}
+	else {
+		printf("아이스아메리카노 + 1\n");
+	}
+
+
+	/*if (morningCoffee == TRUE) {
+		printf("디카페인 커피 + 1\n");
+	}
+	else {
+		if (hour < 15) {
+			printf("아이스아메리카노 + 1\n");
+		}
+		else {
+			printf("디카페인 커피 + 1\n");
+		}
+	}*/
+
+}
+
+void example_09()
+{
+	const int DAY_SEC = 60 * 60 * 24;
+	const int HOUR_SEC = 60 * 60;
+	const int MIN_SEC = 60;
+	int y_sec, sec, min, hour, day;
+
+	printf("계산하실 초를 입력해주세요.\n");
+	scanf_s("%d", &y_sec);
+
+	day = y_sec / DAY_SEC;
+	int  rest_sec = y_sec % DAY_SEC;
+	hour = rest_sec / HOUR_SEC;
+	rest_sec = rest_sec % HOUR_SEC;
+	min = rest_sec / MIN_SEC;
+	sec = rest_sec % MIN_SEC;
+	printf("%d sec : %dday %02d:%02d:%02d\n", y_sec, day, hour, min, sec);
+}
+
+void example_08()// 산술 연산자
+{
+	int a = 10, b = 3; 
+	double p = 10.0, q = 3.0;
+	printf("10 + 3 = %02d\n", a + b);
+	printf("10 - 3 = %02d\n", a - b);
+	printf("10 * 3 = %02d\n", a * b);
+	printf("10 / 3 = %02d\n", a / b);
+	printf("10 %% 3 = %02d\n\n", a % b);
+
+	printf("10.0 + 3.0 = %05.2f\n", p + q);
+	printf("10.0 - 3.0 = %05.2f\n", p - q);
+	printf("10.0 * 3.0 = %05.2f\n", p * q);
+	printf("10.0 / 3.0 = %05.2f\n", p / q);
+	printf("\n");
+	//*****************나눗셈********************
+	//정수/정수 ->정수
+	//실수/정수 ->실수, 정수/실수 ->실수
+	
+	a = 10; b = 3;
+
+	printf("%d/%d=%d\n", a, b, a / b);
+	printf("%d/%d=%.1f\n", a, b, (float)(a / b));
+	printf("%d/%d=%.1f\n", a, b, (double)a / b);
+	printf("%d/%d=%.1f\n", a, b, a / (double)b);
+	printf("\n");
+	//*****************************************
+
+	//*****************오버플로우******************
+	//short : -32768~32767
+	short num = 32767;
+	num++; //1을 증가시키면 오버플로우
+	printf("overflow : %d\n", num);
+
+	//char : -128~127
+	char c = 127;
+	c++;//1을 증가시키면 오버플로우
+	printf("overflow(char) : %d\n", c);
+	
+	//unsigend char : 0~255
+	unsigned char u = 255;
+	u++;
+	printf("overflow(unsigned char) : %d\n", u);
+
+	int n = pow(2, 31)-1;
+	printf("2^31=%d\n", n); //-2,147,486,684~2,147,483,647
+	printf("\n");
+	//******************************************
+}
+
+
+void example_07() 
+{
+	int num = 20;
+	printf("%d\n", num);
+	printf("%10d\n", num);
+	printf("%-10d\n", num);
+	printf("----------------\n");
+	double num2 = 1.23456;
+	printf("%f\n", num2);
+	printf("%10f\n", num2);
+	printf("%-10f\n", num2);
+	printf("%10.2f\n", num2);
+
+}
+
+
+void example_06() {
+	printf("===== 정수변환프로그램 =====\n");
+	printf("정수를 입력하세요 > ");
+	int num;
+	scanf_s("%d", &num);
+	printf("10진수 : %d\n", num);
+	printf("16진수 : %x\n", num);
+	printf("08진수 : %o\n", num);
+}
+
+
+
+void example_05() {
+	// 이름을 입력받아 이름을 출력하는 프로그램
+	char name[255] = "";
+	printf("이름을 입력하세요 > ");
+	gets(name);
+	/*scanf_s("%s", name, (unsigned int)sizeof(name));*/
+	printf("당신의 이름은 %s\n", name);
+}
+
+void example_04() {
+	//숫자2개를 입력받아서 덧셈과 뺄셈을 수행
+	int num1, num2;
+	printf("숫자 1 입력 : ");
+	scanf_s("%d", &num1);
+	printf("숫자 2 입력 : ");
+	scanf_s("%d", &num2);
+	printf("%d + %d = %d\n", num1, num2, num1 + num2);
+	printf("%d - %d = %d\n", num1, num2, num1 - num2);
+	printf("%d * %d = %d\n", num1, num2, num1 * num2);
+}
+void example_03() 
+{
+	int pay = 6500;
+	int bonus = 300;
+	int salary = pay + bonus;
+	printf("당신의 연봉은 %d만원입니다.\n", salary);
+
+	printf("size of int : %d\n", (unsigned int)sizeof(int));
+	printf("size of long long : %d\n", (unsigned int)sizeof(long long));
+	printf("size of _int64 : %d\n", (unsigned int)sizeof(_int64));
+
+	long long account = 5000000000L;
+	printf("당신의 예금잔고는 %lld\n", account);
+
+	float f1 = 0.1234567890123456789;
+	double d1 = 0.1234567890123456789;
+
+	printf(" float : %.20lf\n", f1); // 8자리 오차
+	printf("double : %.20lf\n", d1); //18자리 오차
+
+	// ASCII
+	// A부터 Z까지 출력해보자
+	for (char c = '0'; c <= '9'; c++) 
+	{
+		printf("%c : %d(0x%x)\n", c, c, c);
+	}
+
+	BOOLEAN check = TRUE;
+	if (check == TRUE) 
+	{
+		printf("참입니다.\n");
+	}
+	else 
+	{
+		printf("거짓입니다.\n");
+	}
+
+
+}
+
+void example_02() {
+	printf("정수 입력 : ");
+	int num;
+	scanf("%d", &num);
+	printf("입력한 정수는 %d입니다.", num);
+	return 0;
+}
+
+void example_01() {
+	//1.printf 사용 : 따옴표 안의 내용 출력
+	printf("안녕하세요");
+	//2.printf로 줄바꿈 : \n
+	printf("안녕하세요\n");
+	//3. 특수문자(")사용시 \"를 사용
+	printf("오늘은 \"10월31일\"입니다.\n");
+	//4. 변수를 printf문 안에 넣기
+	int age = 25;   // 정수 : %d
+	printf("당신의 나이는 %d살 입니다.\n", age);
+	// 실수 : float, double
+	printf("float의 크기 %d doulbe의 크기 %d\n", sizeof(float), sizeof(double));
+	float weight = 65.7;
+	printf("당신의 몸무게는 %fkg입니다.\n", weight);
+	char name[20] = "chulsoo";
+	printf("당신의 이름은 %s입니다.\n", &name[0]);
+	printf("당신의 이름의 첫글자 %c입니다\n", name[0]);
+}
+    
+
+    
+	
