@@ -1,0 +1,180 @@
+#include "chapter06.h"
+
+
+int my_pow(int n) {
+	int result = 1;
+	if (n > 0) {
+		result = 2 * my_pow(n-1);
+	}
+	return result;
+}
+
+//문제
+int example_10() {
+	int num;
+	printf("제곱하실 정수값을 입력 : ");
+	scanf("%d", &num);
+	int result = my_pow(num);
+	printf("2^ %d = %d",num,result );
+	
+}
+
+
+int example_09(){
+	int n = 10;
+	int sum = f_sum(100);
+	printf("1부터 10까지의 합은 %d\n", sum);
+}
+
+int example_08(){
+	int num1 = 10, num2 = 20;
+	printf("before num1 : %d num2 : %d\n", num1,num2);
+	swap1(num1, num2);
+	printf("swap1 num1 : %d num2 : %d\n", num1,num2);
+	swap2(&num1, &num2);
+	printf("swap2 num1 : %d num2 : %d\n", num1,num2);
+
+}
+
+
+int example_07() {
+	int num = 10;
+	printf("before num = %d\n", num);
+	add_one(&num);
+	printf("after num = %d\n", num);
+}
+
+
+int money = 10000;
+int coffeeCount = 0;
+int buyCoffee(int cost) {
+	if (money < cost) {
+		return -1;
+	}
+		coffeeCount++;
+		money -= cost;
+		printf("커피 구매 완료 +1\n");
+		printf("구입한 커피 수 : %d \n", coffeeCount);
+		printf("잔액 : %d\n", money);
+		printf("\n");
+	
+}
+
+int example_06(){
+	buyCoffee(4000);
+	buyCoffee(2000);
+	buyCoffee(6000);
+	int result = buyCoffee(6000);
+	if (result == -1) {
+		printf("잔액이 부족합니다.\n");
+		printf("구입한 커피 수 : %d \n", coffeeCount);
+		printf("잔액 : %d\n", money);
+	}
+}
+
+
+int example_05(){
+	srand((unsigned)time(NULL));
+
+	int length = 6;
+	for (size_t i = 0; i < length; i++){
+		printf("%d ", (rand() % 45) + 1);
+	}
+}
+
+
+
+int example_04() {
+	int num1, num2, result, oper;
+	do {
+		printf("계산방법 입력 1>+ 2>- 3>* 4>/\n");
+		scanf("%d", &oper);
+	} while (!oper >= 1 && oper <= 4);
+	printf("계산할 두 숫자를 입력 :");
+	scanf("%d %d", &num1, &num2);
+
+	result = calc(num1,oper,num2);
+	printf("계산결과는 %d입니다.\n", result);
+}
+
+int example_03() {
+	int num = get_integer();
+	printf("입력한 숫자는 %d입니다.\n", num);
+}
+
+
+int example_02() {
+	int num1, num2;
+	printf("첫 번째 정수 입력 >");
+	scanf("%d", &num1);
+	printf("두 번째 정수 입력 >");
+	scanf("%d", &num2);
+	printf("두 수중에 큰값은 : %d\n", find_max_number(num1, num2));
+}
+
+
+
+int example_01(){
+	printf("helloworld\n");
+}
+
+int swap1(int num1, int num2){
+	int tmp = num1;
+	num1 = num2;
+	num2 = tmp;
+	printf("In SWAP1 num1 : %d num2 : %d\n", num1, num2);
+}
+
+int swap2(int* num1, int* num2){
+	int tmp = *num1;
+	*num1 = *num2;
+	*num2 = tmp;
+	printf("In SWAP2 num1 : %d num2 : %d\n", *num1, *num2);
+}
+
+int f_sum(int n) {
+	int sum = 0;
+	if (n == 1) {
+		sum = 1;
+	}
+	else {
+		sum = f_sum(n - 1) + n;
+	}
+	return sum;
+}
+
+
+int add_one(int* num) {
+
+	*num +=1;
+}
+
+int find_max_number(int num1, int num2) {
+	return(num1 > num2) ? num1 : num2;
+}
+
+int get_integer() {
+	int num;
+	printf("정수를 입력하세요 > ");
+	scanf_s("%d", &num);
+	return num;
+}
+
+int calc(int num1, int oper, int num2){
+	int result;
+	switch (oper) {
+	case 1:
+		result = num1 + num2;
+		break;
+	case 2:
+		result = num1 - num2;
+		break;
+	case 3:
+		result = num1 * num2;
+		break;
+	case 4:
+		result = num1 * num2;
+		break;
+	}
+	return result;
+}
