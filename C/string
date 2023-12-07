@@ -1,0 +1,237 @@
+#include "chapter01.h"
+
+void problem_03() {
+	char ps1[20];
+	char ps2[20];
+	gets(ps1);
+	gets(ps2);
+	puts(ps1);
+	puts(ps2);
+}
+
+void problem_02() {
+	char str1[20];
+	char str2[20];
+	char str3[40];
+	fgets(str1,30,stdin);
+	str1[strlen(str1) - 1] = 0;
+	fgets(str2, 30, stdin);
+	str2[strlen(str2) - 1] = 0;
+	strcpy(str3, str1);
+	strcat(str3, str2);
+	puts(str3);
+
+}
+
+void problem_01() {
+	char my_str[20];
+	int n = 0; 
+	int sum = 0;
+	printf("문자열 입력 >");
+	gets(my_str);
+	while (my_str[n] != '\0') {
+		if (my_str[n] >= '0' && my_str[n] <= '9') {
+			sum += (my_str[n]-'0');
+		}
+		n++;
+	}
+		printf("입력한 문자열중 숫자의 합은 %d 입니다\n",sum);
+	
+}
+//(my_str[i] >= '1' && my_str[i] <= '9')
+void example_08() {
+	char str1[30], str2[30], str3[30];
+	printf("세 단어 입력 > ");
+	scanf("%s %s %s", str1, str2, str3);
+	// 1. str1 str2 비교
+	if (strcmp(str2, str1) == -1) {
+		swap_c(str1, str2);
+	}
+	if (strcmp(str3, str1) == -1) {
+		swap_c(str1, str3);
+	}
+	if (strcmp(str3, str2) == -1) {
+		swap_c(str2, str3);
+	}
+	printf("%s, %s, %s\n", str1, str2, str3);
+}
+
+void swap_c(char* str1, char* str2) {
+	char tmp[30];
+	strcpy(tmp, str1);
+	strcpy(str1, str2);
+	strcpy(str2, tmp);
+}
+
+void example_07() {
+	// 제약조건 최대 15자 6자부터 별찍기
+	// abcdefg -> abcde**
+	char str_src[16], str_dst[16];
+	printf("단어입력(최대15자) > ");
+	fgets(str_src, 16, stdin);
+	// str_src의 '\n'을 '\0'로 바꾸기
+	int n = 0;
+	while (TRUE) {
+		if (str_src[n] == '\n') {
+			str_src[n] = '\0';
+			break;
+		}
+		n++;
+	}
+	int count = 0;
+	while (str_src[count] != NULL) {
+		str_dst[count] = (count < 5) ? str_src[count] : '*';
+		count++;
+	}
+	str_dst[count] = '\0';
+	printf("입력한 단어 : %s, 생략한 단어 :%s\n",str_src, str_dst);
+}
+
+void example_06() {
+	//str n cpy : 원하는 문자의 개수만큼 복사
+	char src[10] = "abcdefghi";
+		char dst[10] = "123456789";
+	strncpy(dst+2, src+3, 3);//dst시작위치를 2칸옮기고 src의 위치를 3칸옮겨서 dst로 src를 복사
+	puts(dst);
+	printf("\n============================\n");
+	char str3[50] = "korea"; //  길이5
+	char str4[50] = "대한민국";// 길이 2*4 8
+
+	printf("%s의 길이 : %d\n", str3, strlen(str3));
+	printf("%s의 길이 : %d\n", str4, strlen(str4));
+	printf("배열의 길이 : %d\n", sizeof(str4));
+	printf("\n============================\n");
+	//strcat : 문자열 연결
+	char src2[] = "김밥";
+	char dst2[20] = "삼각";
+	strcat(dst2,src2);// dst2뒤에 src를 연결함(붙임)
+	puts(dst2);
+	printf("\n============================\n");
+	// strncat : 연결할 문자열의 개수를 정해서 연결
+	char dst3[20] = "1234";
+	char src3[] = "567890abcdef";
+	//1234567980
+	strncat(dst3, src3, 6);
+	puts(dst3);
+	printf("\n============================\n");
+	//strcmp : 문자열 비교
+	char capital[100];
+	printf("우리나라 수도는 ㅇㄷ? >");
+	scanf("%s", capital);
+	if (strcmp(capital, "서울") == 0) {
+		printf("조아쒀~~~영촤~");
+	}
+	else {
+		printf("이 씨발러미 내승질 까먹었나보네 7126번 대가리 박아");
+	}
+	printf("\n============================\n");
+
+	// strchr : 문자열 검색
+	char str5[] = "notebook";
+	char* ptr2 = strchr(str5, 'b');
+	if (ptr2 != NULL) {
+		printf("찾은문자 : %c\n", *ptr2);
+		printf("찾은후 문자열 : %s\n", ptr2);
+	}
+}
+
+void example_05() {
+	char name[] = "Hong gildong";
+	printf("%s", name);
+	puts(name);
+	printf("=====================\n");
+	char str[] = "Hello-C";
+	char* ptr = "Hello-C";
+	//둘다 출력가능
+	puts(str);
+	puts(ptr);
+	printf("%s\n", str);
+	printf("%s\n", ptr);
+
+	//포인터는 문자열 변경이 가능 배열은 변경불가
+	ptr = "안녕C";
+	puts(ptr);
+	/*strcpy(str, "안녕C");*///strcpy로는 변경 가능
+	/*puts(str);*/
+
+	str[0] = 'J';//배열 내용을 수정가능 포인터는 안됨
+	puts(str);
+	/*ptr[0] = 'j';
+		puts(prt);*/
+
+
+}
+
+void example_04() {
+	int ch, max_length = 0;
+	printf("문자열 입력 >");
+	while (TRUE) {// 무한 루프
+		int count = 0;// 카운트에 쓸 변수지정
+		ch = getchar(); // 문자열 받기
+		if (ch == EOF) break;// ^z만나면 break;
+		while (ch != '\n') {//글자개수 카운트
+			if ((ch >= 'a' && ch <= 'z') ||// a~z까지 이거나
+				(ch >= 'A' && ch <= 'Z')) {// A~Z이면 카운트값 증가
+				count++;
+			}
+			ch = getchar();// 다시 문자열 받기
+		}
+		max_length = (max_length > count) ? max_length : count;// 최대길이 구하는 식
+		printf("문자열 입력 > ");
+	}
+	printf("최대 문자 길이 : %d\n", max_length);
+}
+	
+		
+	
+void example_03() {
+	int ch;
+	char my_str[100];
+	int count = 0;
+	printf("문자열 입력 > ");
+	int total_count = 0;
+	ch = getchar();
+	my_str[total_count++] = ch;
+	while (ch != '\n') {
+		if (ch >= 'a' && ch <= 'z')
+			count++;
+		ch = getchar();
+		my_str[total_count++] = ch;
+	}
+	my_str[total_count - 1] = '\0';
+	printf("%s 소문자의 개수 : %d\n", my_str, count);
+}
+
+
+void example_02() {
+	char my_ch;
+
+	while (TRUE) {
+		printf("문자입력 > ");
+		scanf_s(" %c", &my_ch, (unsigned)sizeof(char));
+		if ((my_ch >= '0' && my_ch <= '9') ||
+			(my_ch >= 'A' && my_ch <= 'Z') ||
+			(my_ch >= 'a' && my_ch <= 'z')) {
+			break;
+		}
+	}
+
+	printf("입력문자 %c -> %d\n", my_ch, my_ch - '0');
+}
+
+
+void example_01() {
+	char my_ch;
+	int flag = FALSE;
+	printf("대문자를 입력하세요(A~Z, 1글자) > \n");
+	scanf_s(" %c", &my_ch, (unsigned int)sizeof(char));
+
+	//대문자 유효성 검사
+	while (!(my_ch >= 'A' && my_ch <= 'Z')) {
+		printf("대문자를 입력하세요(A~Z, 1글자) > \n");
+		scanf_s(" %c", &my_ch, (unsigned int)sizeof(char));
+	}
+	// 대문자를 소문자로 변환
+	printf("입력한 문자 %c -> %c\n", my_ch, my_ch + ('a' - 'A'));
+}
+ 
