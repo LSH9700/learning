@@ -1,0 +1,33 @@
+# Docker
+
+Docker는 container 기반의 오픈소스 가상화 플랫폼이다. Docker는 Go언어로 개발되어있다.
+
+물리적인 서버 = BareMetal 서버 :Host os를 올리게 되면 하나의 os 밖에 동작을 하지 않는다.
+
+가상화 시스템은 쓸데없이 자원을 소비하는 일이 너무 많아서  탄생함.
+-Host os란? : 현재 사용중인 컴퓨터에 이미 깔려있는 운영체제를 말한다.
+
+ Docker 미사용시 → HyperVisor를 통해 BareMetal 를 사용해서 쓸데없이 자원을 소비 한다
+
+Docker를 사용하면  HyperVisor를 사용하지 않기 때문에 자원을 쓸데없이 소비하지않는다. 예를 들어 window에서 게임을 실행시킨다고 하면 게임을 실행시키는데 필요한 window os에서 게임을 실행 시키는데 필요한 요소들만 뽑아 Docker위에 컨테이너화를 해서 바로 사용한다 
+
+- Docker image = Docker에서 서버프로그램 및 환경 , 소스코드 및 라이브러리 , 컴파일된 실행파일을 묶는 형태
+- Image는 Container를 생성하는 빵틀 이라고 생각 하면 된다.
+-Docker image들은 Docker hub 라는 곳에서 버전관리 및 배포(Pull&push)이(가) 가능하다.
+- 레이어
+-  기존의 이미지를 구성하는 하나의 층이다 ex) Pytroch 버전만 다른 경우 Ubuntu, Cuda . 까지는 같기 때문에 Ubuntu, Cuda는 다운을 안해도 된다 결국 마지막 레이어인 Pytroch 만 다운 받으면 된다.
+- 
+- Search
+- Docker image를 찾는 명령어 : hub에서 직접 찾는게 편함
+- Pull
+- Docker iamge를 다운하는 명령어
+- Docker image
+-다운받은 image 파일들을 목록으로 출력하는 명령어
+- Run
+-Container 생성과 동시에 실행과 접속을 한번에 하는 명령어
+- Container 실행 하고싶을 때 필수적으로 옵션을 -i 와 -t옵션을 같이주어야한다
+보통 docker run -it  images id 이런식으로 적는다.
+- Container 접속후 종료하고 싶으면  exit를 입력한다.
+- 종료한다고 Container가 삭제되는건 아니므로 삭제하고 싶으면 docker rm Container id 를입력해서 삭제 한다.
+- shell script 공부도 간간히 하는게 좋을꺼 같다!
+- 명령어는 계속 써봐야 감이 좀 잡힐듯 하다!
